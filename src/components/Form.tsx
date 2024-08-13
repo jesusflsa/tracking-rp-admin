@@ -2,9 +2,11 @@
 
 import { ChangeEvent, useState } from "react";
 import RightArrow from "./icons/right-arrow";
+import { PulseLoader } from "react-spinners";
 
 function Form() {
   const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(true);
 
   async function handleSubmit() {}
 
@@ -12,7 +14,6 @@ function Form() {
     setValue(e.target.value);
   }
 
-  const loading = false;
 
   return (
     <form className="relative" onSubmit={handleSubmit}>
@@ -35,6 +36,14 @@ function Form() {
           <RightArrow />
         </button>
       )}
+      {loading && (
+          <div
+            title="Solicitando datos"
+            className="absolute mr-4 top-0 right-0 bottom-0 flex items-center justify-between"
+          >
+            <PulseLoader color="hsl(var(--primary)" loading={loading} margin={2} size={5} speedMultiplier={1} />
+          </div>
+        )}
     </form>
   );
 }
